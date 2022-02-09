@@ -17,17 +17,11 @@ export const signUp=({firstname,lastname,email,password,gender})=>{
         }
         if(e.error){
             console.log(e.error.message)
-<<<<<<< HEAD
-        }
-        if(e.response){
-            return e.response.data
-=======
             return {error:e.error}
         }
         if(e.response){
             // return e.response.data
             return {error:"Something went wrong"}
->>>>>>> master
         }else{
             return {error:"Something went wrong"}
         }
