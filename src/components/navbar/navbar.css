@@ -1,0 +1,17 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.link{
+    text-decoration: none !important;
+  
+}
+.searchBox{
+    margin-top: 0.1rem;
+    /* vertical-align: middle; */
+   /* transform: translateY(0.5rem); */
+}
+a{
+    color: black;
+}
