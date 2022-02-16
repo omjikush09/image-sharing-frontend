@@ -1,10 +1,10 @@
 import Axios from "axios";
 import API from "../backend"
-export const signUp=({firstname,lastname,email,password,gender})=>{
+export const signUp=({fullname,email,password,gender})=>{
     console.log(API)
     // console.log(JSON.stringify())
     return Axios.post(`${API}/signup`,{
-        firstname,lastname,gender,password,email
+        fullname,gender,password,email
     }).then(user=>{
         console.log(user.data)
         return user.data

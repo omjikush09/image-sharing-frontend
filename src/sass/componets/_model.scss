@@ -1,0 +1,64 @@
+.model{
+    position: absolute;
+    top:0%;
+    left: 0%;
+    height: 100vh;
+    
+    width: 100%;
+    background-color: transparent;
+    &-background{
+        background-color: rgba(black,.85);
+        // opacity: 0;
+        height: 100%;
+        width: 100%;   
+        display: flex;     
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &_post{
+        display: inline-block;
+        color: white;
+        background-color: white;
+        border-radius: 10px;
+        height: 80%;
+        width: 35%;
+        display: grid;
+        grid-template-rows: 10% 90%;
+        &-title{
+            color: black;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: .5rem 0;
+            font-weight: 500;
+            width: 100%;
+            display: inline-block;
+            border-bottom: 1px solid #e0dddd;
+            // height: 10%;
+        }
+        &_content{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            // height: 90%;
+            // flex-grow: 9;
+        }
+        &-logo{
+
+        }
+        &_input-group{
+
+        }
+    }
+}
+.crossIcon{
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    color: white;
+    
+}

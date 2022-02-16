@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Quintessential&display=swap');
+// body{
+//     background-color: aqua;
+// }
+.navbar{
+    width: 100%;
+    height: 3rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    &_container{
+        min-width: 60rem;
+        max-width: 60rem;
+        height: 100%;
+        background-color: white;
+    }
+}
+.nav{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &-icon{
+        font-family: 'Quintessential', cursive;
+        font-weight: 800;
+    }
+}
+
+.list{
+    display: flex;
+    justify-content: space-around;
+    &_item{
+        list-style: none;
+        margin: 0 .2rem;
+    }
+}
+.messanger{
+    stroke: black;
+    fill: blue;
+    stroke-width: 20;
+
+    &:hover{
+        fill: black;
+    }
+}
+.square{
+    fill: blue;
+        stroke: white;
+    
+
+}
+.squareClicked{
+    fill: black;
+        stroke: white;
+}

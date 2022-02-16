@@ -7,12 +7,12 @@ import "./Signup.scss";
 
 import "./../../sass/componets/_form.scss";
 
+
 const SignUp = () => {
   const [values, setValues] = useState({
     fullname:"",
     email: "",
     password: "123456789",
-    dateOfBirth: Date,
     gender: "Male",
     error: "",
     success: "",
@@ -23,7 +23,6 @@ const SignUp = () => {
     fullname,
     email,
     password,
-    dateOfBirth,
     username,
     gender,
     error,
@@ -32,8 +31,9 @@ const SignUp = () => {
   } = values;
 
   const handleChange = (event) => {
-      
+    
     setValues({ ...values, [event.target.name]: event.target.value });
+
   };
 
   const submit = (e) => {
@@ -185,19 +185,7 @@ const SignUp = () => {
             </Link>
           </div>
         </div>
-      </div>
-
-      {/* <Button color="primary" onClick={(e)=>{submit(e)}} > */}
-      {/* <Container className="fluid">
-            <Container className="bg-dark border p-5" style={{marginTop:"30vh"}} fluid="sm">
-            <Input onChange={(e)=>{handleChange(e,"lastname")}} name="lastname" placeholder="Enter your Last Name" type="text" value={lastname} />
-            {/* <Input onChange={(e)=>{handleChange(e,"dateOfBirth")}} name="dateOfBirth" type="date" value={dateOfBirth} /> */}
-      {/* <Input required onChange={(e)=>{ handleChange(e,"firstname")}} name="firstname" placeholder="Enter your First Name " type="text" value={firstname} /> */}
-      {/* <Input onChange={(e)=>{handleChange(e,"gender")}} name="gender" type="select" required value={gender}> */}
-      {/* <Input required onChange={(e)=>{handleChange(e,"email")}} name="email" placeholder="Enter your email" type="email" value={email} /> */}
-      {/* <Input required onChange={(e)=>{handleChange(e,"password")}} name="password" placeholder="Enter your password" type="password"  value={password}/> */}
-   
-      
+      </div>      
     </>
   );
 };
