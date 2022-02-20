@@ -12,45 +12,20 @@ import "./navbar.scss"
 import "./../../sass/componets/_model.scss";
 import { XIcon } from '@heroicons/react/solid'
 import DragAndDrop from "../drap-and-drop/DragAndDrop";
+import Model from './../model/Model';
+
 const Navbar =()=>{
 
     const [dropdownopen,setDropdownopen]=useState(false)
     const [uploadimage,setUplaodimage]=useState(false);
-    const [istogglePost,setIstogglePost]=useState(true);
+    const [istoggleModel,setIstoggleModel]=useState(true);
+
 
     // const togglePost=()=>{
     //     setIstogglePost(!istogglePost);
     // }
 
-
-    const postModel=()=>{
-        if(istogglePost){
-            return <>
-                <div className="model">
-                    <XIcon className="crossIcon" onClick={()=>{setIstogglePost(!istogglePost)}}/>
-                <div className="model-background">
-                        <div className="model_post">
-                           <div className="">
-                               <span className="model_post-title">
-                               Create new post
-                               </span>
-                           </div>
-                           <div className="model_post_content">
-                            <DragAndDrop/>
-                            
-                           </div>
-                        </div>
-                </div>
-                </div>
-            </>
-        }else{
-            return (
-                <>
-                </>
-            )
-        }
         
-    }
 
 
 
@@ -78,10 +53,10 @@ const Navbar =()=>{
                                 </li>
                                 <li className="list_item">
                                     
-                                <IconContext.Provider value={{ className:istogglePost? "squareClicked":"square",size:"1.5rem" }}>
+                                <IconContext.Provider value={{ className:istoggleModel? "squareClicked":"square",size:"1.5rem" }}>
                                         <div onClick={()=>{
                                             console.log("print")
-                                            setIstogglePost(!istogglePost)}} >
+                                            setIstoggleModel(!istoggleModel)}} >
                                    <FiPlusSquare/>
                                             </div>
                                 </IconContext.Provider>
@@ -91,7 +66,7 @@ const Navbar =()=>{
                     </nav>
                 </div>
             </div>
-            {postModel()}
+            {istoggleModel && <Model setIstoggleModel={setIstoggleModel} istoggleModel={istoggleModel} /> }
         </>
         // <Container className="bg-light" fluid>
         //     <Container className="container-md m-0" >

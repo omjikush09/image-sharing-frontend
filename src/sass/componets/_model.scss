@@ -25,16 +25,31 @@
         width: 35%;
         display: grid;
         grid-template-rows: 10% 90%;
+        &-item{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 .5rem;
+        }
+        &-arrow{
+            display: inline-block;
+        }
         &-title{
             color: black;
-            text-align: center;
+            // text-align: center;
             font-size: 1.2rem;
             padding: .5rem 0;
             font-weight: 500;
-            width: 100%;
+            // width: 100%;
             display: inline-block;
             border-bottom: 1px solid #e0dddd;
             // height: 10%;
+        }
+        &-next{
+            color: #0095f6;
+            font-weight: 500;
+            cursor: pointer;
         }
         &_content{
             display: flex;
@@ -61,4 +76,8 @@
     cursor: pointer;
     color: white;
     
+}
+.arrow-icons{
+    stroke-width: 1rem;
+    cursor: pointer;
 }

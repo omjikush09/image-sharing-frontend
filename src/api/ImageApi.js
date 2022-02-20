@@ -1,14 +1,14 @@
 import axios from "axios"
 import { getUser } from "./userApi"
 import API from "../backend"
-export const Upload=(file,username)=>{
-    console.log(username)
+export const Upload=(file)=>{
+    
     
     return axios.post(`https://api.cloudinary.com/v1_1/omji/image/upload`,file)
     .then(response=>{
         if(response.data.secure_url){
             var url=response.data.secure_url
-            return UploadImageToDb(url,username).then(res=>{
+            return UploadImageToDb(url).then(res=>{
                 return res;
             })
         }else{
@@ -25,7 +25,14 @@ export const Upload=(file,username)=>{
 }
 
 
-export const SendImageUrlToDb=(id,url)=>{
+export const SendImageUrlToDb=(url)=>{
+    const tempid=JSON.parse(localStorage.getItem("_id"))
+    let id="";
+    if(tempid){
+         id=tempid;
+    }else {
+        return Promise.reject({error:"User is not found"})
+    }
     return  axios.post(`${API}/image/imageupload/${id}`,{url},{
                 
         headers:{
