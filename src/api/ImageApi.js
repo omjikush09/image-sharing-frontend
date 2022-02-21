@@ -1,25 +1,35 @@
 import axios from "axios"
 import { getUser } from "./userApi"
 import API from "../backend"
+
 export const Upload=(file)=>{
     
     
     return axios.post(`https://api.cloudinary.com/v1_1/omji/image/upload`,file)
     .then(response=>{
+        console.log(response)
+        console.log("here")
         if(response.data.secure_url){
             var url=response.data.secure_url
-            return UploadImageToDb(url).then(res=>{
+            console.log(url)
+            return SendImageUrlToDb(url).then(res=>{
+                console.log(res)
+                console.log("here 2")
                 return res;
             })
         }else{
+            console.log("here 3")
             return response.data
         }
     }).catch(e=>{
+        console.log(e)
         if(e.respone){
+            console.log("error 1")
             return e.respone
         }
         else{
-            return e
+            console.log("error 2")
+            return Promise.reject({error:"Something went wrong"})
         }
     })
 }
@@ -31,7 +41,7 @@ export const SendImageUrlToDb=(url)=>{
     if(tempid){
          id=tempid;
     }else {
-        return Promise.reject({error:"User is not found"})
+        return Promise.reject({error:"User is not found it's frontend"})
     }
     return  axios.post(`${API}/image/imageupload/${id}`,{url},{
                 
@@ -39,38 +49,14 @@ export const SendImageUrlToDb=(url)=>{
             Authorization:`Bearer ${JSON.parse(localStorage.getItem("jwt"))}`
         }
     }).then(res=>{
+        console.log(res)
         return res.data
     }).catch(e=>{
+        console.log(e)
         if(e.response){
-            console.log(e.response)
             return e.respone.data
         }
-        return e
+        return Promise.reject(e)
     })
 }
 
-
-
-export const UploadImageToDb=(url,username)=>{
-    console.log(username)
-    //getting id from db
-     return getUser(username).then(res =>{
-       
-        if(res._id){
-            var id=res._id
-            
-            //Sending url to db to store
-            return SendImageUrlToDb(id,url)
-
-        }else if(res.data.error){
-            return res.data
-        }else{
-            console.log(res)
-        }
-        
-    })
-    .catch(e=>{
-        console.log(e)
-        return {error:"Something went wrong"}
-    })
-}

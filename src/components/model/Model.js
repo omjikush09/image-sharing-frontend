@@ -28,6 +28,7 @@ const Model = ({setIstoggleModel,istoggleModel}) => {
     const onClickBack=(e)=>{
         console.log(e);
         // e.preventDefalut()
+        setSharePost(false)
         setContent(false)
         setError(false)
     }
@@ -40,8 +41,8 @@ const Model = ({setIstoggleModel,istoggleModel}) => {
                   <XIcon className="crossIcon" onClick={closeModel}/>
               <div className="model-background" onDragOver={onDragOver} onDragCapture={onDragOver} onDrop={onDrop}>
                       <div className="model_post">
-                         <div className="model_post-item" onClick={onClickBack}>
-                                <span  className="model_post-arrow">
+                         <div className="model_post-item" >
+                                <span  className="model_post-arrow" onClick={onClickBack}>
                              { content &&<IconContext.Provider value={{color:"black" ,className:"arrow-icons",size:"1.5rem"}}>
                                 <AiOutlineArrowLeft />
                              </IconContext.Provider>}
@@ -49,7 +50,7 @@ const Model = ({setIstoggleModel,istoggleModel}) => {
                              <span className="model_post-title">
                              Create new post
                              </span>
-                             <span className="model_post-next">{content && "Share"}</span>
+                             <span onClick={()=>setSharePost(true)} className="model_post-next">{content && "Share"}</span>
                          </div>
                          <div className="model_post_content">
                          { <DragAndDrop setContent={setContent} content={content} error={error} setError={setError} sharePost={sharePost} />}
