@@ -13,12 +13,13 @@ import "./../../sass/componets/_model.scss";
 import { XIcon } from '@heroicons/react/solid'
 import DragAndDrop from "../drap-and-drop/DragAndDrop";
 import Model from './../model/Model';
+import Search from "../search/Search";
 
 const Navbar =()=>{
 
     const [dropdownopen,setDropdownopen]=useState(false)
     const [uploadimage,setUplaodimage]=useState(false);
-    const [istoggleModel,setIstoggleModel]=useState(true);
+    const [istoggleModel,setIstoggleModel]=useState(false);
 
 
     // const togglePost=()=>{
@@ -39,7 +40,8 @@ const Navbar =()=>{
                             <span>Friend Chat</span>
                         </div>
                         <div className="nav-search">
-                            <input type="search" name="search" id="search" />
+                            
+                            <Search/>
                         </div>
                         <div className="nav-links">
                             <ul className="list">
