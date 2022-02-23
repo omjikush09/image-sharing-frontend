@@ -42,9 +42,10 @@
 }
 .messanger{
     stroke: black;
-    fill: blue;
-    stroke-width: 20;
-
+    fill: $color-white;
+    stroke-width: 35;
+    margin: .2rem;
+    // padding: .2rem;
     &:hover{
         fill: black;
     }

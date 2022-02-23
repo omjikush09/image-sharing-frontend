@@ -47,7 +47,7 @@ const Navbar =()=>{
                             <ul className="list">
                                 <li className="list_item">
                                     
-                                <IconContext.Provider value={{ className: "messanger",size:"1.5rem" }}>
+                                <IconContext.Provider value={{ className: "messanger",size:"1.3rem" }}>
                                         <div>
                                     <FaFacebookMessenger/>
                                             </div>
