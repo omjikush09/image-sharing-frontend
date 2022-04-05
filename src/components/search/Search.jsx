@@ -32,7 +32,7 @@ const Search = () => {
     const onBlur=e=>{
       setState({...state,searching:false})
       
-    }
+    } 
     const handleChange=e=>{
         e.preventDefault();
         setUsername(e.target.value)

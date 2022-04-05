@@ -4,10 +4,14 @@ import PrivateRoutes from "./PrivateRoutes";
 import Profile from "./pages/Profile.js";
 import SignUp from "./pages/Signup/Signup";
 import SignIn from "./pages/Signin/Signin.js";
-import UserHome from "./pages/UserHome.js";
+import UserHome from "./pages/Home/UserHome.js";
+//redux
+import { Provider } from "react-redux";
+import store from "./redux-store/store";
 
 const Router=()=>{
     return (
+        <Provider store={store}>
         <BrowserRouter>
             <Routes>
                 <Route path="/signin" element={<SignIn/>} />
@@ -20,6 +24,7 @@ const Router=()=>{
                 <Route path='/' element={<PrivateRoutes><UserHome/></PrivateRoutes>}/>
             </Routes>
         </BrowserRouter>
+        </Provider>
     )
 }
 

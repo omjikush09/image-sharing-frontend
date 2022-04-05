@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
 import { Container, Row, Col } from "reactstrap";
-import Navbar from "../components/navbar/Navbar.js";
-import Post from "../components/post/Post";
-import { getPost, getUserthroughId } from "../api/userApi";
+import Navbar from "../../components/navbar/Navbar.js";
+import Post from "../../components/post/Post";
+import { getPost, getUserthroughId } from "../../api/userApi";
+import { connect } from "react-redux";
+import {login} from "../../action/authAction"
 
-const UserHome = () => {
+const UserHome = ({add}) => {
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({
@@ -34,6 +36,8 @@ const UserHome = () => {
           });
         }
         console.log(user);
+        // login(user);
+        
       }
     );
   };
@@ -78,6 +82,9 @@ const UserHome = () => {
     getUser();
     home();
   }, []);
+  useEffect(()=>{
+    add(user)
+  },[user])
 
   const {firstname,lastname,profileImage,username}=user;
 
@@ -86,6 +93,7 @@ const UserHome = () => {
     <>
       <Navbar />
       <br></br>
+      {/* <button onClick={()=>add(user)}>login</button> */}
       <Container fluid>
         <Row style={{ padding: "0" }}>
           <Col md={2}></Col>
@@ -132,4 +140,12 @@ const UserHome = () => {
   );
 };
 
-export default UserHome;
+const mapStateToProps= state=>({})
+const mapDispatchToProps=dispatch=>({
+  add:user=>{
+    dispatch(login(user))
+  }
+})
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserHome);

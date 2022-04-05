@@ -112,7 +112,7 @@ export const getPost = ({ userid }) => {
       if (e.response) {
         return e.response.data;
       } else {
-        return { error: "Something went wrong" };
+        return Promise.reject( { error: "Something went wrong" });
       }
     });
 };
