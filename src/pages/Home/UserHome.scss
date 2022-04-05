@@ -1,0 +1,14 @@
+
+.container{
+    display: flex;
+    justify-content: center;
+    padding-top: 2.5rem;
+}
+.container_home{
+    display: grid;
+    grid-template-columns: 40rem 20rem;
+    column-gap: 1.2rem;
+    &-post>div{
+        margin-bottom: 1.5rem;
+    }
+}

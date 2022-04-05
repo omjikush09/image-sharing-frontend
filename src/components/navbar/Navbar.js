@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { IconContext } from "react-icons";
 
 
@@ -16,19 +16,79 @@ import { XIcon } from '@heroicons/react/solid'
 import DragAndDrop from "../drap-and-drop/DragAndDrop";
 import Model from './../model/Model';
 import Search from "../search/Search";
+//api
+import { getUserthroughId } from "../../api/userApi";
 
 //redux
 import { connect } from "react-redux";
+import { login } from "../../action/authAction";
 // import {}
 
 
-const Navbar =({user})=>{
+const Navbar =({addUserToState})=>{
 
     const [dropdownopen,setDropdownopen]=useState(false)
     const [uploadimage,setUplaodimage]=useState(false);
     const [istoggleModel,setIstoggleModel]=useState(false);
+    const [user, setUser] = useState({
+        firstname: "",
+        lastname: "",
+        username: "",
+        profileImage: "",
+        isLoading: "",
+        error: "",
+        id:""
+      });
+    
+     //get user
+     const getUser = () => {
+        getUserthroughId({ userId: JSON.parse(localStorage.getItem("_id")) }).then(
+          (res) => {
+            console.log(res);
+            if (res.error) {
+              setUser({ ...user, error: res.error });
+            } else {
+              setUser({
+                ...user,
+                firstname: res.firstname,
+                lastname: res.lastname,
+                error: "",
+                profileImage: res.profileImage,
+                username: res.username,
+                id:res._id
+              });
+            }
+            console.log(user);
+            // login(user);
+            
+          }
+        );
+      };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     useEffect(()=>{
-        console.log(user)
+        getUser();
+       
+    },[])
+    useEffect(()=>{
+        addUserToState(user);
     },[user])
     
 
@@ -47,7 +107,9 @@ const Navbar =({user})=>{
                 <div className="navbar_container">
                     <nav className="nav">
                         <div className="nav-icon">
+                            <Link to="/" className="home">
                             <span>Friend Chat</span>
+                            </Link>
                         </div>
                         <div className="nav-search">
                             
@@ -92,15 +154,20 @@ const Navbar =({user})=>{
                 </div>
             </div>
             {istoggleModel && <Model setIstoggleModel={setIstoggleModel} istoggleModel={istoggleModel} /> }
+            <Outlet/>
         </>
      
     )
 }
 
 const mapStateToProps=state=>({
-    user:state.auth
+   
 })
-const mapDispatchToProps=dispatch=>({})
+const mapDispatchToProps=dispatch=>({
+    addUserToState:user=>{
+        dispatch(login(user))
+    }
+})
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(Navbar);

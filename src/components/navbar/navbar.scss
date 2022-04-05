@@ -60,3 +60,9 @@
     fill: black;
         stroke: white;
 }
+.home{
+    text-decoration: none;
+    &:visited{
+        color:black;
+    }
+}

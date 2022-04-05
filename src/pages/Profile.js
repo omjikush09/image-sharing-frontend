@@ -9,7 +9,7 @@ import ProfilePost from "../components/profilepost/ProfilePost";
 const Profile =()=>{
 
     const param=useParams();
-
+   
     const [self,setSelf]=useState(false);
     const [isFollowing,setIsfollowing]=useState(false);
 
@@ -28,7 +28,7 @@ const Profile =()=>{
     })
 
     const {id,username,firstname,lastname,numberOfFollowers,numberOfFollowing,numberOfPost,images,followers}=values;
-
+    document.title=`${firstname} ${lastname}`
     const addfollowingButton=()=>{
         console.log(id);
         const userid=JSON.parse(localStorage.getItem("_id"));
@@ -104,7 +104,7 @@ const Profile =()=>{
     
     return(
         <>
-        <Navbar/>
+        {/* <Navbar/> */}
         <Container fluid>
             <Container className="container-sm mt-5 mb-5">
                 <Row>
