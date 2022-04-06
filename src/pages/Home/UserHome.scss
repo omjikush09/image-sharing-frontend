@@ -8,8 +8,15 @@
     display: grid;
     grid-template-columns: 40rem 20rem;
     column-gap: 1.2rem;
+
     &-post>div{
         margin-bottom: 1.5rem;
+    }
+    &-user{
+        display: grid;
+        grid-template-columns: 5rem auto;
+        column-gap: 2rem;
+        
     }
 }
 .post{
@@ -19,4 +26,10 @@
     &-content{
         padding: .5rem .5rem;
     }
+}
+.profileImage{
+
+    width: 5rem;
+    height: 5rem;
+
 }

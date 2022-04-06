@@ -1,21 +1,19 @@
 import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
-import { Container, Row, Col } from "reactstrap";
-import Navbar from "../../components/navbar/Navbar.js";
+
 import Post from "../../components/post/Post";
 import { getPost, getUserthroughId } from "../../api/userApi";
 
 import { connect } from "react-redux";
-import {login} from "../../action/authAction"
-import {IconContext} from "react-icons"
+
 
 
 import "./UserHome.scss"
-import { BsFillHeartFill } from 'react-icons/bs';
-import {AiOutlineHeart} from "react-icons/ai"
+
 import LikePost from '../../components/LikePost/LikePost';
 import Addcomment from "../../components/AddComment/Addcomment.js";
 import ShowComment from "../../components/ShowComment/ShowComment.js";
+import { Link } from "react-router-dom";
 const UserHome = ({loginUser}) => {
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -106,12 +104,18 @@ const UserHome = ({loginUser}) => {
               );
             })
             }
-
-
-
         </div>
          <div className="container_home-user">
-
+              <div className="profileImage">
+                <img style={{width:"100%",borderRadius:"100%" ,height:"100%"}} src={loginUser.profileImage} alt="" />
+              </div>
+              <div className="profileUsername">
+                <Link style={{ textDecoration:"none"}} to={`/${loginUser.username}`}>
+                <div className="username" >{loginUser.username}</div>
+                </Link>
+                <div>{loginUser.firstname} {loginUser.lastname}</div>
+              </div> 
+            
 
         </div>
       </div>

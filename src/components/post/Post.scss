@@ -2,9 +2,12 @@
 .title{
     display: flex;
     align-items: center;
-    border-bottom: .2px solid grey;
-    padding: .5rem 0.5rem;
+    
+    margin: .5rem 0.5rem ;
     &-name{
-
+        color: black;
+    }
+    &-link{
+        text-decoration: none;
     }
 }
