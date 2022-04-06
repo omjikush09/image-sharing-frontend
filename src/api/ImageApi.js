@@ -100,3 +100,18 @@ export const addcomment=(comment,userId,postId,username)=>{
         return Promise.reject(res)
     })
 }
+
+//getCommment
+
+export const getComment=(comments,userId)=>{
+    console.log(userId)
+    return axios.post(`${API}/getcomments/${userId}`,{comments},{
+        headers:{
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem("jwt"))}`
+        }
+    }).then(res=>{
+        return Promise.resolve(res.data)
+    }).catch(res=>{
+        return Promise.reject(res)
+    })
+}

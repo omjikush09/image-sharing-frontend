@@ -15,6 +15,7 @@ import { BsFillHeartFill } from 'react-icons/bs';
 import {AiOutlineHeart} from "react-icons/ai"
 import LikePost from '../../components/LikePost/LikePost';
 import Addcomment from "../../components/AddComment/Addcomment.js";
+import ShowComment from "../../components/ShowComment/ShowComment.js";
 const UserHome = ({loginUser}) => {
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -91,11 +92,12 @@ const UserHome = ({loginUser}) => {
                   post={arr.url}
                   username={u.username}
                   />
-                 <LikePost likedUsers={arr.likedUsers} postId={arr._id} />
+                 <LikePost    key={key} likedUsers={arr.likedUsers} postId={arr._id} />
                 <div className="postContent">
                   
-                 { arr.comments  && <div>View all {arr.comments.length} comments</div>}
-                 <Addcomment postId={arr._id} username={u.username}/>
+                 {/* { arr.comments  && <div>View all {arr.comments.length} comments</div>} */}
+                 <ShowComment    key={key} commentsId={arr.comments}/>
+                 <Addcomment    key={key} postId={arr._id} username={u.username}/>
                   </div>  
                   </>
               );

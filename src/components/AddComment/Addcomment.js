@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const Addcomment = ({loginUser,postId,username}) => {
 
     const [comment,setComment]=useState("");
-
+   
     const onChange=(e)=>{
         setComment(e.target.value);
     }
@@ -15,7 +15,7 @@ const Addcomment = ({loginUser,postId,username}) => {
         console.log("df")
         e.preventDefault();
         addcomment(comment,loginUser.id,postId,username).then(res=>{
-
+            setComment("")
         }).catch(res=>console.log(res))
     }
 
