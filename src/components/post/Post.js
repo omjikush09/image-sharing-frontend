@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Post.scss"
 const Post = ({
   profileImg ,
   post,
@@ -8,7 +8,7 @@ const Post = ({
   return (
     <>
       <div style={{  maxWidth: "40rem" }}>
-        <div style={{ padding: "0.5rem 0" }}>
+        <div className="title" >
           <img
             style={{
               width: "2rem",
@@ -19,7 +19,7 @@ const Post = ({
             src={profileImg}
             alt="profie"
           />
-          <span>{username}</span>
+          <span className="title-name">{username}</span>
         </div>
         <img
           style={{ width: "100%" }}

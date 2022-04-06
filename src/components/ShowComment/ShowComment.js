@@ -19,7 +19,7 @@ const ShowComment = ({commentsId,loginUser}) => {
     },[loginUser,showcomment])
   return (
     <div>{showcomment && comments.map((com,key)=>{
-        return <div key={key}>
+        return <div key={comments._id}>
             {com.comment}
             </div>
     })}

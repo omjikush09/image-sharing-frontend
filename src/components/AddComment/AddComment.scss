@@ -1,0 +1,18 @@
+@import "/src/sass/abstracts/variable";
+
+
+.box{
+    display: grid;
+    padding: 1rem 0rem;
+    grid-template-columns: 90% 10%;
+}
+
+.Comment-box{
+   font-size: 1.1em;
+    // background-color: black;
+    outline: none;
+    border:none;
+}
+.post-button{
+    // color: ;
+}

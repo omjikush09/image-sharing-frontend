@@ -73,7 +73,8 @@ const UserHome = ({loginUser}) => {
         <div className="container">
       <div className="container_home">
 
-        <div className="container_home-post">
+        <div className="container_home-posts">
+          
         {posts && posts.map((arr, key) => {
               const u = following.find((user) => {
                 //    console.log(user)
@@ -84,22 +85,24 @@ const UserHome = ({loginUser}) => {
               // }
               // console.log(arr)
               return (
-                <>
-           
+            
+                <div className="post">
+
                 <Post
-                  key={key}
+                  key={arr._id}
                   profileImg={u.profileImage}
                   post={arr.url}
                   username={u.username}
                   />
+                <div className="post-content">
                  <LikePost    key={key} likedUsers={arr.likedUsers} postId={arr._id} />
-                <div className="postContent">
                   
-                 {/* { arr.comments  && <div>View all {arr.comments.length} comments</div>} */}
+                 
                  <ShowComment    key={key} commentsId={arr.comments}/>
                  <Addcomment    key={key} postId={arr._id} username={u.username}/>
-                  </div>  
-                  </>
+                  </div>   
+                  </div>
+              
               );
             })
             }
@@ -107,7 +110,7 @@ const UserHome = ({loginUser}) => {
 
 
         </div>
-        <div className="container_home-user">
+         <div className="container_home-user">
 
 
         </div>
@@ -115,48 +118,7 @@ const UserHome = ({loginUser}) => {
         </div>
 
 
-      {/* <Container fluid>
-        <Row style={{ padding: "0" }}>
-          <Col md={2}></Col>
-          <Col md={6}>
-            {posts.map((arr, key) => {
-              const u = following.find((user) => {
-                //    console.log(user)
-                return user._id === arr.uploadedBy;
-              });
-              // console.log(arr)
-              return (
-                <Post
-                  key={key}
-                  profileImg={u.profileImage}
-                  post={arr.url}
-                  username={u.username}
-                />
-              );
-            })}
-       
-          </Col>
-      <Col md={2}>
-            <div>
-
-            <img
-              className="imageCircle"
-              style={{ width: "4rem",
-              borderRadius: "100%",
-              height: "4rem",
-              display:"inline-block",
-              marginRight: "1rem",}}
-              src={loginUser.profileImage}
-              alt=""
-              />
-            
-       
-           
-           <span>{loginUser.username}</span>
-              </div>
-          </Col> 
-          </Row>
-      </Container> */}
+     
 
 
     </>

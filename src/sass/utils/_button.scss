@@ -9,4 +9,18 @@
         color: white;
         background-color:#0095f6;
     }
+    &-post{
+        font-weight:500 ;
+        color:#0095f6 ;
+        border: none;
+        font-size: 1.02rem;
+        cursor: pointer;
+        background-color: white;
+        // &:active,&:{
+        // }
+        &:disabled{
+            cursor: auto;
+            color:#b8b8b8;
+        }
+    }
 }

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { addcomment } from './../../api/ImageApi';
 import { connect } from 'react-redux';
 
+import "./AddComment.scss"
+
 const Addcomment = ({loginUser,postId,username}) => {
 
     const [comment,setComment]=useState("");
@@ -20,9 +22,9 @@ const Addcomment = ({loginUser,postId,username}) => {
     }
 
   return (
-      <div>
-          <input type="text" onChange={onChange} value={comment} placeholder="Add Comment" />
-          <button onClick={onSubmit} disabled={!comment} >Post</button>
+      <div className='box'>
+          <input className='Comment-box' type="text" onChange={onChange} value={comment} placeholder="Add Comment" />
+          <button className='btn-post' onClick={onSubmit} disabled={!comment} >Post</button>
       </div>
   )
 }
