@@ -60,3 +60,43 @@ export const SendImageUrlToDb=(url)=>{
     })
 }
 
+
+
+//Like api 
+export const likePost=(userId,postId)=>{
+    return axios.post(`${API}/likepost/${userId}`,{postId},{
+        headers:{
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem("jwt"))}`
+        }
+    }).then(res=>{
+        return Promise.resolve(res.data)
+    }).catch(err=>{
+        return Promise.reject(err)
+    })
+}
+export const unlikePost=(userId,postId)=>{
+    return axios.post(`${API}/unlikepost/${userId}`,{postId},{
+    headers:{
+        Authorization:`Bearer ${JSON.parse(localStorage.getItem("jwt"))}`
+    }}
+    ).then(res=>{
+        return Promise.resolve(res.data)
+    }).catch(err=>{
+        return Promise.reject(err)
+    })
+}
+
+
+//Add Comment
+
+export const addcomment=(comment,userId,postId,username)=>{
+    return axios.post(`${API}/addcomment/${userId}`,{comment,userId,postId,username},{
+        headers:{
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem("jwt"))}`
+        }
+    }).then(res=>{
+        return Promise.resolve(res.data)
+    }).catch(res=>{
+        return Promise.reject(res)
+    })
+}

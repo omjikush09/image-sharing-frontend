@@ -13,7 +13,8 @@ import {IconContext} from "react-icons"
 import "./UserHome.scss"
 import { BsFillHeartFill } from 'react-icons/bs';
 import {AiOutlineHeart} from "react-icons/ai"
-import LikePost from '../../components/likePost/LikePost';
+import LikePost from '../../components/LikePost/LikePost';
+import Addcomment from "../../components/AddComment/Addcomment.js";
 const UserHome = ({loginUser}) => {
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -77,9 +78,9 @@ const UserHome = ({loginUser}) => {
                 //    console.log(user)
                 return user._id === arr.uploadedBy;
               });
-              if(loginUser.id===arr.uploadedBy){
-                return ; //if user followed himself it's a bug
-              }
+              // if(loginUser.id===arr.uploadedBy){
+              //   return  //if user followed himself it's a bug
+              // }
               // console.log(arr)
               return (
                 <>
@@ -90,10 +91,11 @@ const UserHome = ({loginUser}) => {
                   post={arr.url}
                   username={u.username}
                   />
-                 <LikePost likedUsers={arr.likedUsers} />
+                 <LikePost likedUsers={arr.likedUsers} postId={arr._id} />
                 <div className="postContent">
-           
+                  
                  { arr.comments  && <div>View all {arr.comments.length} comments</div>}
+                 <Addcomment postId={arr._id} username={u.username}/>
                   </div>  
                   </>
               );
