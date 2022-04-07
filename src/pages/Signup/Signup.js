@@ -12,7 +12,7 @@ const SignUp = () => {
   const [values, setValues] = useState({
     fullname:"",
     email: "",
-    password: "123456789",
+    password: "",
     gender: "Male",
     error: "",
     success: "",
@@ -157,7 +157,7 @@ const SignUp = () => {
                 Password
               </label>
             </div>
-            <button className="form_button"  type="submit">
+            <button className="form_button" disabled={(!password || !username || !fullname ||!email)} type="submit">
               Sign Up
             </button>
           </form>

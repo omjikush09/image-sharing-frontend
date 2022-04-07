@@ -10,8 +10,8 @@ const SignIn =()=>{
 
     const navigate= useNavigate()
     const [values,setValues] =useState({
-        email:"omjikush09@gmail.com",
-        password:"123456789",
+        email:"",
+        password:"",
         success:"",
         error:"",
         redirect:false
@@ -41,7 +41,8 @@ const SignIn =()=>{
                     }
                
                 setTimeout(() => {
-                    navigate(`/${user.user.username}`)
+                    // navigate(`/${user.user.username}`)
+                    navigate("/")
                 }, 1000);
             }
         })
@@ -75,7 +76,7 @@ const SignIn =()=>{
                     <input  className="form_input-text" type="password" placeholder="Password" required id="password" name="password" onChange={handleChange} value={password} />
                     <label htmlFor="password" className="form_input-label">Password</label>
                     </div>
-                    <button className="form_button" >Log In</button>
+                    <button className="form_button" disabled={ !email || !password }  >Log In</button>
                     </form>
 
                     <div className="signup_line">

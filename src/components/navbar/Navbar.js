@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 
 
 //icons
-import {FaFacebookMessenger} from "react-icons/fa"
+
 import {FiPlusSquare} from "react-icons/fi"
 import { FiLogOut } from "react-icons/fi";
 
-import { isauthentcated } from "../../api/userApi";
-import UploadImage from ".././uploadImage/UploadImage";
+
 import "./navbar.scss"
 import "./../../sass/componets/_model.scss";
-import { XIcon } from '@heroicons/react/solid'
-import DragAndDrop from "../drap-and-drop/DragAndDrop";
+
 import Model from './../model/Model';
 import Search from "../search/Search";
 //api
@@ -22,13 +20,12 @@ import { getUserthroughId } from "../../api/userApi";
 //redux
 import { connect } from "react-redux";
 import { login } from "../../action/authAction";
-// import {}
+
 
 
 const Navbar =({addUserToState})=>{
 
-    const [dropdownopen,setDropdownopen]=useState(false)
-    const [uploadimage,setUplaodimage]=useState(false);
+    const navigate=useNavigate();
     const [istoggleModel,setIstoggleModel]=useState(false);
     const [user, setUser] = useState({
         firstname: "",
@@ -59,13 +56,16 @@ const Navbar =({addUserToState})=>{
               });
             }
             console.log(user);
-            // login(user);
+        
             
           }
         );
       };
 
-
+      const logout=()=>{
+          localStorage.clear()
+          navigate("/signin")
+      }
 
 
 
@@ -92,10 +92,7 @@ const Navbar =({addUserToState})=>{
     },[user])
     
 
-    // const togglePost=()=>{
-    //     setIstogglePost(!istogglePost);
-    // }
-
+  
         
 
 
@@ -117,17 +114,10 @@ const Navbar =({addUserToState})=>{
                         </div>
                         <div className="nav-links">
                             <ul className="list">
-                                {/* <li className="list_item">
-                                    
-                                <IconContext.Provider value={{ className: "messanger",size:"1.3rem" }}>
-                                        <div>
-                                    <FaFacebookMessenger/>
-                                            </div>
-                                             </IconContext.Provider>
-                                </li> */}
+                              
                                 <li className="list_item">
                                     
-                                <IconContext.Provider value={{ className:istoggleModel? "squareClicked":"square",size:"1.5rem" }}>
+                                <IconContext.Provider value={{ className:istoggleModel? "squareClicked":"square",size:"2.0rem" }}>
                                         <div onClick={()=>{
                                             setIstoggleModel(!istoggleModel)}} >
                                    <FiPlusSquare/>
@@ -143,7 +133,7 @@ const Navbar =({addUserToState})=>{
                                 </li>
                                 <li className="list_item">
                                     <IconContext.Provider value={{size:"1.5rem"}}>
-                                            <div>
+                                            <div onClick={logout} style={{cursor:"pointer"}}>
                                                 <FiLogOut/>
                                             </div>
                                     </IconContext.Provider>

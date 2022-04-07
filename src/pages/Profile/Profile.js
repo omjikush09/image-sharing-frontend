@@ -1,11 +1,12 @@
 import React,{useEffect, useState} from "react"
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import Navbar from "../components/navbar/Navbar";
-import { addfollowing, getUser } from "../api/userApi";
-import ProfileImage from "../components/profileImage/ProfileImage";
-import ProfilePost from "../components/profilepost/ProfilePost";
 
+import { addfollowing, getUser } from "../../api/userApi";
+import ProfileImage from "../../components/profileImage/ProfileImage";
+import ProfilePost from "../../components/profilepost/ProfilePost";
+
+import "./Profile.scss"
 const Profile =()=>{
 
     const param=useParams();
@@ -27,7 +28,7 @@ const Profile =()=>{
         success:""
     })
 
-    const {id,username,firstname,lastname,numberOfFollowers,numberOfFollowing,numberOfPost,images,followers}=values;
+    const {id,username,firstname,lastname,numberOfFollowers,numberOfFollowing,numberOfPost,images}=values;
     document.title=`${firstname} ${lastname}`
     const addfollowingButton=()=>{
         console.log(id);
@@ -71,27 +72,17 @@ const Profile =()=>{
                         const visiterid=JSON.parse(localStorage.getItem("_id"));
                         // console.log(visiterid);
                         // console.log(res.followers)
-                        res.followers.map(people=>{
-                            // console.log(visiterid)
-                            // console.log(people)
+                        for (const people of res.followers) {
                             if(visiterid===people){
-                                           console.log(people)
-                                           console.log("he")
-                                            setIsfollowing(true);
-                                            console.log(isFollowing)
-            
-                                       }
-                        })
-                        // console.log("he")
-                    //    for (const people of followers ) {
-                    //        console.log(people)
-                    //        if(visiterid===people){
-                    //            console.log("hedefd")
-                    //            console.log(people)
-                    //             setIsfollowing(true);
-
-                    //        }
-                    //    }
+                                console.log(people)
+                                console.log("he")
+                                setIsfollowing(true);
+                                console.log(isFollowing)
+                                
+                            }
+                        }
+                        
+                      
                     }
                 }
             }
@@ -104,19 +95,14 @@ const Profile =()=>{
     
     return(
         <>
-        {/* <Navbar/> */}
-        <Container fluid>
-            <Container className="container-sm mt-5 mb-5">
-                <Row>
-                <Col md={1}>
-                    </Col>
-                    <Col md={3}>
-                        <ProfileImage src="https://olympic.ca/wp-content/uploads/2018/02/img_9806-e1518070422879.jpg"/>
-                    </Col>
-                    <Col md={1}>
-                    </Col>
-                    <Col md={6}>
-                        <div>
+
+           <div className="container-profile">
+               <div className="profile">
+                    <div className="profile-image">
+                    <ProfileImage src="https://olympic.ca/wp-content/uploads/2018/02/img_9806-e1518070422879.jpg"/>
+                    </div>
+                    <div className="profile-content">
+                    <div>
                            <span  className="font-size-medium margin-right">{username}</span>
                            {self && <button className="btn btn-primary">Edit Profile</button>}
                           
@@ -134,10 +120,27 @@ const Profile =()=>{
                         <div>
                             <h5 className="inline-block" >{firstname}</h5> <h5 className="inline-block">{lastname}</h5> 
                         </div>
+                    </div>
+               </div>
+               </div> 
+               <div className="text-center " > <strong>Posts</strong> </div>
+   
+        <Container fluid>
+            <Container className="container-sm mt-5 mb-5">
+                <Row>
+                <Col md={1}>
+                    </Col>
+                    <Col md={3}>
+                        
+                    </Col>
+                    <Col md={1}>
+                    </Col>
+                    <Col md={6}>
+                       
                     </Col>
                 </Row>
                 <br />
-                <div className="text-center " > <strong>Posts</strong> </div>
+                
                 <Row>
                     <Col md={1}>
                     </Col>

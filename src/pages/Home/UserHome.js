@@ -6,8 +6,6 @@ import { getPost, getUserthroughId } from "../../api/userApi";
 
 import { connect } from "react-redux";
 
-
-
 import "./UserHome.scss"
 
 import LikePost from '../../components/LikePost/LikePost';

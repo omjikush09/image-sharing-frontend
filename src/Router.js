@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter ,Routes,Route } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
-import Profile from "./pages/Profile.js";
+import Profile from "./pages/Profile/Profile.js";
 import SignUp from "./pages/Signup/Signup";
 import SignIn from "./pages/Signin/Signin.js";
 import UserHome from "./pages/Home/UserHome.js";
@@ -20,7 +20,7 @@ const Router=()=>{
                 {/* <Route path="/:username" element={} /> */}
                 {/* <Route path="/" element={<Profile/>} /> */}
               
-                <Route path="/" element={<Navbar/>}>
+                <Route path="/" element={<PrivateRoutes><Navbar/></PrivateRoutes>}>
                 <Route path=':username' element={<PrivateRoutes><Profile/></PrivateRoutes>}/>
                 <Route path='' element={<PrivateRoutes><UserHome/></PrivateRoutes>}/>
                 </Route>

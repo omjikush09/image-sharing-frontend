@@ -30,7 +30,10 @@ const Search = () => {
       setState({...state,searching:true})
     }
     const onBlur=e=>{
-      setState({...state,searching:false})
+      setTimeout(() => {
+         //timeout so that link could work before closing the search bar
+        setState({...state,searching:false})
+      }, 100);
       
     } 
     const handleChange=e=>{
