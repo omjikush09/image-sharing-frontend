@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 import "./UserHome.scss"
 
-import LikePost from '../../components/LikePost/LikePost';
+import LikePost from '../../components/LikePost/LikePost.js';
 import Addcomment from "../../components/AddComment/Addcomment.js";
 import ShowComment from "../../components/ShowComment/ShowComment.js";
 import { Link } from "react-router-dom";
