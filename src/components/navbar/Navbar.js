@@ -73,16 +73,6 @@ const Navbar =({addUserToState})=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
     useEffect(()=>{
         getUser();
        

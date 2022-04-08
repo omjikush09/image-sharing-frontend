@@ -65,20 +65,21 @@ const SignUp = () => {
     });
   };
 
-  const checkUser=(username)=>{
-   
-    checkUsername(username).then(res=>{
-      setValues({...values,error:""})
-      setUsernameValid(true)
-    }).catch(res=>{
- 
-      setValues({...values,error:res.error})
-      setUsernameValid(false)
-    })
-  }
+
 
   
   useEffect(()=>{
+    const checkUser=(username)=>{
+   
+      checkUsername(username).then(res=>{
+        setValues({...values,error:""})
+        setUsernameValid(true)
+      }).catch(res=>{
+   
+        setValues({...values,error:res.error})
+        setUsernameValid(false)
+      })
+    }
     if(timer){
       clearTimeout(timer)
     }
@@ -88,7 +89,8 @@ const SignUp = () => {
       }
     },1000)
     setTimer(timeout)
-  },[username])
+  },[timer, username, values])
+  
   const NavigateToSign = () => {
     if (redirectTime === 0) {
       return <Navigate to="/signin" />;

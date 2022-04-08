@@ -1,17 +1,19 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 
-import Post from "../../components/post/Post";
+// import Post from "../../components/post/Post";
 import { getPost} from "../../api/userApi";
-
 import { connect } from "react-redux";
-
 import "./UserHome.scss"
-
 import LikePost from '../../components/likePost/LikePost.js';
 import Addcomment from "../../components/AddComment/Addcomment.js";
-import ShowComment from "../../components/ShowComment/ShowComment.js";
 import { Link } from "react-router-dom";
+// import ShowComment from "../../components/ShowComment/ShowComment.js";
+const ShowComment =React.lazy(()=>import("../../components/ShowComment/ShowComment.js"))
+const Post =React.lazy(()=>import( "../../components/post/Post"))
+
+
+
 const UserHome = ({loginUser}) => {
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -79,12 +81,13 @@ const UserHome = ({loginUser}) => {
                 return user._id === arr.uploadedBy;
               });
               // if(loginUser.id===arr.uploadedBy){
-              //   return  //if user followed himself it's a bug
+              //   return                                   //if user followed himself it's a bug
               // }
               // console.log(arr)
               return (
             
                 <div className="post">
+                  <Suspense key={arr._id} fallback={<div>Loading......</div>}>
 
                 <Post
                   key={arr._id}
@@ -92,11 +95,13 @@ const UserHome = ({loginUser}) => {
                   post={arr.url}
                   username={u.username}
                   />
+                  </Suspense >
                 <div className="post-content">
                  <LikePost    key={key} likedUsers={arr.likedUsers} postId={arr._id} />
                   
-                 
+                 <Suspense key={arr._id} fallback={<div>Loading...</div>}>
                  <ShowComment    key={key} commentsId={arr.comments}/>
+                 </Suspense>
                  <Addcomment    key={key} postId={arr._id}/>
                   </div>   
                   </div>

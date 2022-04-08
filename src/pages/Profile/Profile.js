@@ -19,6 +19,7 @@ const Profile =()=>{
         username:"",
         firstname:"",
         lastname:"",
+        profileImage:"",
         numberOfFollowers:0,
         numberOfFollowing:0,
         followers:[],
@@ -127,18 +128,7 @@ const Profile =()=>{
    
         <Container fluid>
             <Container className="container-sm mt-5 mb-5">
-                <Row>
-                <Col md={1}>
-                    </Col>
-                    <Col md={3}>
-                        
-                    </Col>
-                    <Col md={1}>
-                    </Col>
-                    <Col md={6}>
-                       
-                    </Col>
-                </Row>
+               
                 <br />
                 
                 <Row>
