@@ -1,6 +1,6 @@
 import Axios from "axios";
 import API from "../backend";
-export const signUp = ({ fullname, email, password, gender }) => {
+export const signUp = ({ fullname, email, password, gender,username }) => {
   console.log(API);
   // console.log(JSON.stringify())
   return Axios.post(`${API}/signup`, {
@@ -8,6 +8,7 @@ export const signUp = ({ fullname, email, password, gender }) => {
     gender,
     password,
     email,
+    username
   })
     .then((user) => {
       console.log(user.data);
@@ -61,6 +62,21 @@ export const getUser = (username) => {
       }
     });
 };
+
+export const checkUsername =(username)=>{
+  
+  return Axios.post(`${API}/checkusername`,{username}).then(res=>{
+    return res.data
+  }).catch(res=>{
+   
+    if(res.response.data){
+      return Promise.reject(res.response.data)
+    }else{
+      return Promise.reject({error:"Something went wrong"})
+    }
+  })
+}
+
 
 export const isauthentcated = () => {
   if (typeof window == "undefined") {
@@ -120,8 +136,7 @@ export const getPost = ({ userid }) => {
 export const home = () => {};
 
 export const addfollowing = ({ userid, addfollowingId }) => {
-  console.log(userid);
-  console.log(addfollowingId);
+ 
   return Axios.put(
     `${API}/addfollowing/${userid}`,
     {
