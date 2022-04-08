@@ -34,7 +34,7 @@ const SignUp = () => {
   } = values;
 
   const handleChange = (event) => {
-    
+    console.log("hadle change")
     setValues({ ...values, [event.target.name]: event.target.value });
    
   };
@@ -65,21 +65,21 @@ const SignUp = () => {
     });
   };
 
-
+  const checkUser=(username)=>{
+   
+    checkUsername(username).then(res=>{
+      setValues({...values,error:""})
+      setUsernameValid(true)
+    }).catch(res=>{
+ 
+      setValues({...values,error:res.error})
+      setUsernameValid(false)
+    })
+  }
 
   
   useEffect(()=>{
-    const checkUser=(username)=>{
-   
-      checkUsername(username).then(res=>{
-        setValues({...values,error:""})
-        setUsernameValid(true)
-      }).catch(res=>{
-   
-        setValues({...values,error:res.error})
-        setUsernameValid(false)
-      })
-    }
+    
     if(timer){
       clearTimeout(timer)
     }
@@ -89,7 +89,7 @@ const SignUp = () => {
       }
     },1000)
     setTimer(timeout)
-  },[timer, username, values])
+  },[ username])
   
   const NavigateToSign = () => {
     if (redirectTime === 0) {
@@ -212,7 +212,7 @@ const SignUp = () => {
             <Link to="/signin" className="container-register_button-link">
               Log in
             </Link>
-            
+            {JSON.stringify(values)}
           </div>
         </div>
       </div>      
