@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { signUp } from "../../api/userApi";
+import React, { useState,useEffect } from "react";
+import { checkUsername, signUp } from "../../api/userApi";
 import { Link, Navigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { AiFillFacebook } from "react-icons/ai";
@@ -17,13 +17,16 @@ const SignUp = () => {
     error: "",
     success: "",
     redirectTime: -1,
-    username:""
+  
   });
+  const [usernameValid,setUsernameValid]=useState(false);
+  const [username,setUsername]=useState("")
+  const [timer,setTimer]=useState(null)
   const {
     fullname,
     email,
     password,
-    username,
+    
     gender,
     error,
     success,
@@ -33,7 +36,7 @@ const SignUp = () => {
   const handleChange = (event) => {
     
     setValues({ ...values, [event.target.name]: event.target.value });
-
+   
   };
 
   const submit = (e) => {
@@ -62,6 +65,30 @@ const SignUp = () => {
     });
   };
 
+  const checkUser=(username)=>{
+   
+    checkUsername(username).then(res=>{
+      setValues({...values,error:""})
+      setUsernameValid(true)
+    }).catch(res=>{
+ 
+      setValues({...values,error:res.error})
+      setUsernameValid(false)
+    })
+  }
+
+  
+  useEffect(()=>{
+    if(timer){
+      clearTimeout(timer)
+    }
+    const timeout=setTimeout(()=>{
+      if(username){
+        checkUser(username)
+      }
+    },1000)
+    setTimer(timeout)
+  },[username])
   const NavigateToSign = () => {
     if (redirectTime === 0) {
       return <Navigate to="/signin" />;
@@ -84,7 +111,7 @@ const SignUp = () => {
   };
   const errorMessage = () => {
     if (error) {
-      return <h1 className="text-white text-center">Oops! {error}</h1>;
+      return <h3 className="text-white text-center">Oops! {error}</h3>;
     }
   };
   return (
@@ -95,7 +122,7 @@ const SignUp = () => {
         {successMessage()}
         {errorMessage()}
         {redirectMessage()}
-          <h1 className="text-center">Instagram</h1>
+          <h1 className="text-center">Friend Share</h1>
           <form  onSubmit={submit} className="form">
             <div className="form_input-group">
               <input
@@ -135,7 +162,7 @@ const SignUp = () => {
                 required
                 id="username"
                 name="username"
-                onChange={handleChange}
+                onChange={(e)=>{setUsername(e.target.value)}}
               />
               <label htmlFor="username" className="form_input-label">
                 Username
@@ -157,7 +184,7 @@ const SignUp = () => {
                 Password
               </label>
             </div>
-            <button className="form_button" disabled={(!password || !username || !fullname ||!email)} type="submit">
+            <button className="form_button" disabled={(!password || !username || !fullname ||!email || !usernameValid)} type="submit">
               Sign Up
             </button>
           </form>
@@ -183,6 +210,7 @@ const SignUp = () => {
             <Link to="/signin" className="container-register_button-link">
               Log in
             </Link>
+            
           </div>
         </div>
       </div>      
