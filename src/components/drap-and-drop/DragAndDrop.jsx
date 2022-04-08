@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "./DragAndDrop.scss";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import { Upload } from "./../../api/ImageApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -69,7 +69,7 @@ const DragAndDrop = ({ setContent, content, error, setError, sharePost }) => {
         );
         setImage(formData);
       }
-      e.target.files = 0;
+      // e.target.files.length = 0;
     }
   };
 
@@ -90,7 +90,7 @@ const DragAndDrop = ({ setContent, content, error, setError, sharePost }) => {
             <div ref={wrapperRef} className="upload_container-logo">
               <svg
                 aria-label="Icon to represent media such as images or videos"
-                class="_8-yf5 "
+                className="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="77"

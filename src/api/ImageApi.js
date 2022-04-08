@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getUser } from "./userApi"
+
 import API from "../backend"
 
 export const Upload=(file)=>{

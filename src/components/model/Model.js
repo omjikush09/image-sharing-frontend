@@ -10,11 +10,11 @@ const Model = ({setIstoggleModel,istoggleModel}) => {
     const [error,setError]=useState("")
     const [sharePost,setSharePost]=useState(false)
     const onDragOver=(e)=>{
-        e.preventDefalut();
+        // e.preventDefalut();
 
     }
     const onDrop=(e)=>{
-        e.preventDefalut();
+        // e.preventDefalut();
 
     }
    

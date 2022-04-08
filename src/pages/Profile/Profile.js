@@ -20,7 +20,7 @@ const Profile =()=>{
         firstname:"",
         lastname:"",
         numberOfFollowers:0,
-        numberOfFollowing:5,
+        numberOfFollowing:0,
         followers:[],
         numberOfPost:0,
         images:[],

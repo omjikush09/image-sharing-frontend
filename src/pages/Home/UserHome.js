@@ -1,14 +1,14 @@
 import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 
 import Post from "../../components/post/Post";
-import { getPost, getUserthroughId } from "../../api/userApi";
+import { getPost} from "../../api/userApi";
 
 import { connect } from "react-redux";
 
 import "./UserHome.scss"
 
-import LikePost from '../../components/LikePost/LikePost.js';
+import LikePost from './../../components/LikePost/LikePost.js';
 import Addcomment from "../../components/AddComment/Addcomment.js";
 import ShowComment from "../../components/ShowComment/ShowComment.js";
 import { Link } from "react-router-dom";
@@ -23,7 +23,8 @@ const UserHome = ({loginUser}) => {
     let arr = [];
     const temp = [];
     userid && getPost({ userid }).then((res) => { //get post of followings
-      res.map((user) => {
+      res.length>0 && res.map((user) => {
+        
         let a = {};
         console.log(user)
         // console.log(user.user.firstname)
@@ -38,9 +39,10 @@ const UserHome = ({loginUser}) => {
         }
         if (user.user.images) {
           user.user.images.map((image) => {
-            arr.push(image);
+           return  arr.push(image);
           });
         }
+        return ""
       });
       arr.sort((a, b) => {
         return a.createdAt < b.createdAt ? 1 : -1;

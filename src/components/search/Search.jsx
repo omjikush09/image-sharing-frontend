@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Search.scss"
 import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react'
 import { getUserList } from '../../api/userApi';
 import ReactLoading from "react-loading"
 import { Link } from 'react-router-dom';
@@ -73,7 +73,7 @@ const Search = () => {
 
     useEffect(()=>{
       clearTimer();
-      console.log("what")
+    
       if(username){
         const newTimer=setTimeout(()=>{
             getUsers();
