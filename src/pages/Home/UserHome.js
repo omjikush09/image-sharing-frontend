@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 import "./UserHome.scss"
 
-import LikePost from './../../components/LikePost/LikePost.js';
+import LikePost from '../../components/likePost/LikePost.js';
 import Addcomment from "../../components/AddComment/Addcomment.js";
 import ShowComment from "../../components/ShowComment/ShowComment.js";
 import { Link } from "react-router-dom";
@@ -97,7 +97,7 @@ const UserHome = ({loginUser}) => {
                   
                  
                  <ShowComment    key={key} commentsId={arr.comments}/>
-                 <Addcomment    key={key} postId={arr._id} username={u.username}/>
+                 <Addcomment    key={key} postId={arr._id}/>
                   </div>   
                   </div>
               

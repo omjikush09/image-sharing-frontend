@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import "./AddComment.scss"
 
-const Addcomment = ({loginUser,postId,username}) => {
+const Addcomment = ({loginUser,postId}) => {
 
     const [comment,setComment]=useState("");
    
@@ -14,9 +14,10 @@ const Addcomment = ({loginUser,postId,username}) => {
     }
 
     const onSubmit=(e)=>{
-        console.log("df")
+    
+
         e.preventDefault();
-        addcomment(comment,loginUser.id,postId,username).then(res=>{
+        addcomment(comment,loginUser.id,postId,loginUser.username).then(res=>{
             setComment("")
         }).catch(res=>console.log(res))
     }
