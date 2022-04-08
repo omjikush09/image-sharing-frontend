@@ -212,7 +212,7 @@ const SignUp = () => {
             <Link to="/signin" className="container-register_button-link">
               Log in
             </Link>
-            {JSON.stringify(values)}
+            
           </div>
         </div>
       </div>      
