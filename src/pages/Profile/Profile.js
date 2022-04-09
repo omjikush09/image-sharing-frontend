@@ -17,8 +17,7 @@ const Profile =()=>{
     const [values,setValues]=useState({
         id:"",
         username:"",
-        firstname:"",
-        lastname:"",
+       
         profileImage:"",
         numberOfFollowers:0,
         numberOfFollowing:0,
@@ -26,11 +25,12 @@ const Profile =()=>{
         numberOfPost:0,
         images:[],
         error:"",
-        success:""
+        success:"",
+        fullname:""
     })
 
-    const {id,username,firstname,lastname,numberOfFollowers,numberOfFollowing,numberOfPost,images}=values;
-    document.title=`${firstname} ${lastname}`
+    const {id,username,numberOfFollowers,numberOfFollowing,numberOfPost,images,fullname}=values;
+    document.title=`${fullname}`
     const addfollowingButton=()=>{
         console.log(id);
         const userid=JSON.parse(localStorage.getItem("_id"));
@@ -53,14 +53,14 @@ const Profile =()=>{
                 setValues({...values,
                 id:res._id,
                 username:res.username,
-                firstname:res.firstname,
-                lastname:res.lastname,
+               
                 numberOfFollowers:res.numberOfFollowers,
                 numberOfFollowing:res.numberOfFollowing,
                 followers:res.following,
                 numberOfPost:res.numberOfPost,
                 images:res.images,
-                error:""
+                error:"",
+                fullname:res.fullname
                 })
                 if(typeof window !=="undefined"){
                    
@@ -76,7 +76,8 @@ const Profile =()=>{
                         for (const people of res.followers) {
                             if(visiterid===people){
                                 console.log(people)
-                                console.log("he")
+                        
+                                setSelf(false)
                                 setIsfollowing(true);
                                 console.log(isFollowing)
                                 
@@ -119,7 +120,7 @@ const Profile =()=>{
                         </div>
                         <br />
                         <div>
-                            <h5 className="inline-block" >{firstname}</h5> <h5 className="inline-block">{lastname}</h5> 
+                            <h5 className="inline-block" >{fullname}</h5> 
                         </div>
                     </div>
                </div>
