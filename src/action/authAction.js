@@ -1,4 +1,4 @@
-import {LOGOUT,LOGIN} from "./action-types";
+import {LOGOUT,LOGIN,GOOGLELOGIN} from "./action-types";
 
 
 export const logout=()=>({
@@ -10,3 +10,8 @@ export const login=(user)=>({
     type:LOGIN,
     payload:user
 }) 
+
+export const googleLoigin=(user)=>({
+    type:GOOGLELOGIN,
+    payload:user
+})

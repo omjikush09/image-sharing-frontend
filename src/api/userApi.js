@@ -1,11 +1,11 @@
 import Axios from "axios";
 import API from "../backend";
-export const signUp = ({ fullname, email, password, gender,username }) => {
+export const signUp = ({ fullname, email, password,username }) => {
   console.log(API);
   // console.log(JSON.stringify())
   return Axios.post(`${API}/signup`, {
     fullname,
-    gender,
+  
     password,
     email,
     username
@@ -30,6 +30,39 @@ export const signUp = ({ fullname, email, password, gender,username }) => {
         return { error: "Something went wrong" };
       } else {
         return { error: "Something went wrong" };
+      }
+    });
+};
+export const googleLogin = ({ fullname, email, password,id ,profileImage}) => {
+  console.log(API);
+  // console.log(JSON.stringify())
+  return Axios.post(`${API}/googlelogin`, {
+    fullname,
+   id,
+    password,
+    email,
+    profileImage
+  })
+    .then((user) => {
+      console.log(user.data);
+      return user.data;
+    })
+    .catch((e) => {
+      console.log(e);
+      try {
+        console.log(e.response.data);
+      } catch (error) {
+        console.log("nothing", error);
+      }
+      if (e.error) {
+        console.log(e.error.message);
+        return { error: e.error };
+      }
+      if (e.response) {
+        // return e.response.data
+        return Promise.reject({ error: "Something went wrong" });
+      } else {
+        return Promise.reject({ error: "Something went wrong" });
       }
     });
 };

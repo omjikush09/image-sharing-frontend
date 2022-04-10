@@ -5,10 +5,15 @@ import { IconContext } from "react-icons";
 import { AiFillFacebook } from "react-icons/ai";
 import "./Signup.scss";
 
+//action
+import { connect } from "react-redux";
+import { googleLoigin } from './../../action/authAction';
+
 import "./../../sass/componets/_form.scss";
+import GoogleLogin from "react-google-login";
 
 
-const SignUp = () => {
+const SignUp = ({loginWithGoogle}) => {
   const [values, setValues] = useState({
     fullname:"",
     email: "",
@@ -26,7 +31,6 @@ const SignUp = () => {
     fullname,
     email,
     password,
-    
     gender,
     error,
     success,
@@ -64,6 +68,15 @@ const SignUp = () => {
       }
     });
   };
+
+  const onGoogleSuccess=(user)=>{
+    loginWithGoogle(user)
+    console.log(user)
+  }
+  const onGoogleFailure=(failure)=>{
+      console.log(failure)
+  }
+
 
   const checkUser=(username)=>{
    
@@ -202,6 +215,7 @@ const SignUp = () => {
               <span >Log in with Facebook</span>
             </div>
           </Link>
+          <GoogleLogin clientId={process.env.REACT_APP_CLIENT_ID} buttonText="Login With Google" onSuccess={onGoogleSuccess} onFailure={onGoogleFailure} cookiePolicy={'single_host_origin'} />
           <Link to="#" className="container_forget">
             <div >Forget password?</div>
           </Link>
@@ -220,4 +234,13 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapStateToProps=state=>({})
+
+const mapDispatchToProps=dispatch=>({
+  loginWithGoogle:user=>{
+    dispatch(googleLoigin(user))
+  }
+})
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp);

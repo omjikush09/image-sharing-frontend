@@ -28,8 +28,7 @@ const Navbar =({addUserToState})=>{
     const navigate=useNavigate();
     const [istoggleModel,setIstoggleModel]=useState(false);
     const [user, setUser] = useState({
-        firstname: "",
-        lastname: "",
+        fullname:"",
         username: "",
         profileImage: "",
         isLoading: "",
