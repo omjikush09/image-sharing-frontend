@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import { authenticate, signIn } from "../../api/userApi";
 import {useNavigate} from "react-router-dom"
-import { AiFillFacebook } from "react-icons/ai";
-import { IconContext } from "react-icons";
+
 import { Link } from "react-router-dom";
+import { googleLogin } from "../../api/userApi";
+import GoogleLogin from "react-google-login";
+import { connect } from 'react-redux';
+import { googleLoigin } from "../../action/authAction";
 
-
-const SignIn =()=>{
+const SignIn =({loginWithGoogle})=>{
 
     const navigate= useNavigate()
     const [values,setValues] =useState({
@@ -47,7 +49,26 @@ const SignIn =()=>{
             }
         })
     }
+    const onGoogleSuccess=(user)=>{
+        localStorage.setItem("jwt",JSON.stringify(user.tokenId))
+        googleLogin({email:user.profileObj.email,id:user.profileObj.googleId,profileImage:user.profileObj.imageUrl,fullname:user.profileObj.name}).catch(res=>{
+            console.log(res)
+            loginWithGoogle({error:"Something went wrong"})
+        }).then(res=>{
+          loginWithGoogle(user)
+            localStorage.setItem("_id",JSON.stringify(res._id))
+            if(!res.username){
+              navigate("/adddetail")
+            }else{
+              navigate("/")
+            }
+        })
+    }
+    const onGoogleFailure=(failure)=>{
+       
+        console.log(failure)
 
+    }
 
     const successMessage=()=>{
         if(success){
@@ -84,7 +105,7 @@ const SignIn =()=>{
                         <span className="signup_line-span">OR</span>
                       
                     </div>
-                  <Link to="/" className="link" >
+                  {/* <Link to="/" className="link" >
 
                     <div className="login-With-Facebook">
 
@@ -96,8 +117,12 @@ const SignIn =()=>{
                 <span className="lo">
                     Log in with Facebook
                 </span>                  
-                    </div>
                   </Link>
+                    </div> */}
+                    <div  className="login-With-google" >
+
+                <GoogleLogin clientId={process.env.REACT_APP_CLIENT_ID} buttonText="Login With Google" onSuccess={onGoogleSuccess} onFailure={onGoogleFailure} cookiePolicy={'single_host_origin'} />
+                </div>
                   
                     <Link to="#" className="link" >
                     <div className="container_forget">
@@ -116,8 +141,17 @@ const SignIn =()=>{
     )
 }
 
+const mapStateToProps=state=>({
+    loginUser:state.auth
+  })
+  
+  const mapDispatchToProps=dispatch=>({
+    loginWithGoogle:user=>{
+      dispatch(googleLoigin(user))
+    }
+  })
 
-export default SignIn;
+export default connect(mapStateToProps,mapDispatchToProps) (SignIn);
 
 
 

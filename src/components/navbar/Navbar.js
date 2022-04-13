@@ -46,8 +46,7 @@ const Navbar =({addUserToState})=>{
             } else {
               setUser({
                 ...user,
-                firstname: res.firstname,
-                lastname: res.lastname,
+                fullname:res.fullname,
                 error: "",
                 profileImage: res.profileImage,
                 username: res.username,

@@ -74,7 +74,7 @@ const UserHome = ({loginUser}) => {
       <div className="container_home">
 
         <div className="container_home-posts">
-          
+          {loginUser.error && <div>{loginUser.error}</div>}
         {posts && posts.map((arr, key) => {
               const u = following.find((user) => {
                 //    console.log(user)
@@ -118,7 +118,7 @@ const UserHome = ({loginUser}) => {
                 <Link style={{ textDecoration:"none"}} to={`/${loginUser.username}`}>
                 <div className="username" >{loginUser.username}</div>
                 </Link>
-                <div>{loginUser.firstname} {loginUser.lastname}</div>
+                <div>{loginUser.fullname}</div>
               </div> 
             
 

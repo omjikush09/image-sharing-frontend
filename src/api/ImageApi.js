@@ -74,6 +74,7 @@ export const likePost=(userId,postId)=>{
         return Promise.reject(err)
     })
 }
+
 export const unlikePost=(userId,postId)=>{
     return axios.post(`${API}/unlikepost/${userId}`,{postId},{
     headers:{
@@ -115,3 +116,16 @@ export const getComment=(comments,userId)=>{
         return Promise.reject(res)
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

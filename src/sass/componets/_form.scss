@@ -16,6 +16,7 @@
         padding: 0rem 1rem;
         margin: 1.1rem 0rem;
         background-color:#fafafa ;
+        font-size: 1.1rem;
         border: none;
         &::placeholder{
             color: #9c9cbb;
@@ -54,6 +55,7 @@
         color: white;
         font-weight: 600;
         font-size: 1.3rem;
+        text-align: center;
        cursor: pointer;
    
        &:disabled{

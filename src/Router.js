@@ -9,6 +9,7 @@ import UserHome from "./pages/Home/UserHome.js";
 import { Provider } from "react-redux";
 import store from "./redux-store/store";
 import Navbar from "./components/navbar/Navbar";
+import Detail from "./pages/Detail/Detail";
 
 const Router=()=>{
     return (
@@ -19,7 +20,7 @@ const Router=()=>{
                 <Route path="/signup" element={<SignUp/>} />
                 {/* <Route path="/:username" element={} /> */}
                 {/* <Route path="/" element={<Profile/>} /> */}
-              
+                <Route path="/adddetail" element={<PrivateRoutes><Detail/></PrivateRoutes>}/>
                 <Route path="/" element={<PrivateRoutes><Navbar/></PrivateRoutes>}>
                 <Route path=':username' element={<PrivateRoutes><Profile/></PrivateRoutes>}/>
                 <Route path='' element={<PrivateRoutes><UserHome/></PrivateRoutes>}/>

@@ -1,10 +1,10 @@
 import React, { useState,useEffect } from "react";
 import { checkUsername, signUp } from "../../api/userApi";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate ,useNavigate} from "react-router-dom";
 import { IconContext } from "react-icons";
 import { AiFillFacebook } from "react-icons/ai";
 import "./Signup.scss";
-
+import { googleLogin } from "../../api/userApi";
 //action
 import { connect } from "react-redux";
 import { googleLoigin } from './../../action/authAction';
@@ -13,7 +13,10 @@ import "./../../sass/componets/_form.scss";
 import GoogleLogin from "react-google-login";
 
 
-const SignUp = ({loginWithGoogle}) => {
+const SignUp = ({loginWithGoogle,loginUser}) => {
+  
+  const navigate=useNavigate()
+
   const [values, setValues] = useState({
     fullname:"",
     email: "",
@@ -57,7 +60,7 @@ const SignUp = ({loginWithGoogle}) => {
           lastname: "",
           email: "",
           password: "",
-          gender: "Male",
+          gender: "",
           error: "",
           redirectTime: 3,
         });
@@ -69,9 +72,37 @@ const SignUp = ({loginWithGoogle}) => {
     });
   };
 
-  const onGoogleSuccess=(user)=>{
-    loginWithGoogle(user)
-    console.log(user)
+ 
+  const onGoogleSuccess=async (user)=>{
+
+    localStorage.setItem("jwt",JSON.stringify(user.tokenId))
+            googleLogin({email:user.profileObj.email,id:user.profileObj.googleId,profileImage:user.profileObj.imageUrl,fullname:user.profileObj.name}).catch(res=>{
+                console.log(res)
+                loginWithGoogle({error:"Something went wrong"})
+            }).then(res=>{
+              loginWithGoogle(user)
+                localStorage.setItem("_id",JSON.stringify(res._id))
+                if(!res.username){
+                  navigate("/adddetail")
+                }else{
+                  navigate("/")
+                }
+            })
+
+
+    //  await loginWithGoogle(user)
+    //  const jwt=localStorage.getItem("jwt")
+    //  if(loginUser.id && jwt && !loginUser.username){
+    //    console.log(loginUser.id)
+    //    console.log(jwt)
+    //    setTimeout(() => {
+    //      //
+    //      navigate("/adddetail")
+    //    }, 1000);
+    //  }else{
+    //    navigate("/")
+    //  }
+    // console.log(user)
   }
   const onGoogleFailure=(failure)=>{
       console.log(failure)
@@ -207,15 +238,18 @@ const SignUp = ({loginWithGoogle}) => {
           <div className="signup_line">
             <span className="signup_line-span">OR</span>
           </div>
-          <Link to="/" className="link">
+          {/* <Link to="/" className="link">
             <div className="login-With-Facebook">
               <IconContext.Provider value={{ color: "blue", size: "1.2rem" }}>
                 <AiFillFacebook />
               </IconContext.Provider>
               <span >Log in with Facebook</span>
             </div>
-          </Link>
+          </Link> */}
+          <div  className="login-With-google" >
+
           <GoogleLogin clientId={process.env.REACT_APP_CLIENT_ID} buttonText="Login With Google" onSuccess={onGoogleSuccess} onFailure={onGoogleFailure} cookiePolicy={'single_host_origin'} />
+          </div>
           <Link to="#" className="container_forget">
             <div >Forget password?</div>
           </Link>
@@ -234,7 +268,9 @@ const SignUp = ({loginWithGoogle}) => {
   );
 };
 
-const mapStateToProps=state=>({})
+const mapStateToProps=state=>({
+  loginUser:state.auth
+})
 
 const mapDispatchToProps=dispatch=>({
   loginWithGoogle:user=>{

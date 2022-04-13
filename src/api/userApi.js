@@ -213,3 +213,20 @@ export const getUserList = (username) => {
       return Promise.reject({error:"Something went wrong"})
   })
 };
+
+
+export const redirect=()=>{
+  
+}
+
+export const updateProfile=(username)=>{
+  const id = JSON.parse(localStorage.getItem("_id"));
+  return Axios.put(`${API}/addusername/${id}`,{username},{
+      headers:{
+          Authorization:`Bearer ${JSON.parse(localStorage.getItem("jwt"))}`
+      }
+  }).then(res=>{return res.data})
+  .catch(res=>{
+      return Promise.reject({error:"Something went wrong"})
+  })
+}
