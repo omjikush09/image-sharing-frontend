@@ -11,6 +11,7 @@ const Search = () => {
     const [username,setUsername]=useState("")
     const [users,setUsers]=useState([]);
     const [timer ,setTimer]=useState(null);
+    
     const [state,setState]=useState({
       isLoading:false,
       startTyping:true,
@@ -28,13 +29,12 @@ const Search = () => {
     }
     const onFocus=e=>{
       setState({...state,searching:true})
+    
     }
+   
     const onBlur=e=>{
-      setTimeout(() => {
-         //timeout so that link could work before closing the search bar
-        setState({...state,searching:false})
-      }, 100);
-      
+      setState({...state,searching:false})
+    
     } 
     const handleChange=e=>{
         e.preventDefault();
@@ -87,14 +87,14 @@ const Search = () => {
   return (
     <>  <div className="search">
             <div className="search_bar">
-            <input className='search_bar-input' placeholder='Search' onFocus={onFocus} onBlur={onBlur} type="search" name="search" id="search" onChange={handleChange} value={username} />
+            <input className='search_bar-input' placeholder='Search' onFocus={onFocus}  type="search" name="search" id="search" onChange={handleChange} value={username} />
             {searching &&
               <>
              
-            <div className='search_bar-result'>
+            <div className='search_bar-result' >
                    {users && !userNotfound &&users.map((user)=>{
                      return (
-                       <Link key={user._id} to={"/" +user.username} className="search_bar-link">
+                       <Link onClick={onBlur} key={user._id} to={"/" +user.username} className="search_bar-link">
                      <div  className="search_username">
                        <div className="image-container">
                          <img src={user.profileImage} className="image-container-image" alt="Profile" />

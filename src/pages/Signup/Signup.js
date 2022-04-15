@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { checkUsername, signUp } from "../../api/userApi";
 import { Link, Navigate ,useNavigate} from "react-router-dom";
-import { IconContext } from "react-icons";
-import { AiFillFacebook } from "react-icons/ai";
+
 import "./Signup.scss";
 import { googleLogin } from "../../api/userApi";
 //action

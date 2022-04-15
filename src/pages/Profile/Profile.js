@@ -17,7 +17,6 @@ const Profile =()=>{
     const [values,setValues]=useState({
         id:"",
         username:"",
-       
         profileImage:"",
         numberOfFollowers:0,
         numberOfFollowing:0,
@@ -29,7 +28,7 @@ const Profile =()=>{
         fullname:""
     })
 
-    const {id,username,numberOfFollowers,numberOfFollowing,numberOfPost,images,fullname}=values;
+    const {id,username,numberOfFollowers,numberOfFollowing,numberOfPost,images,fullname,profileImage}=values;
     document.title=`${fullname}`
     const addfollowingButton=()=>{
         console.log(id);
@@ -60,6 +59,7 @@ const Profile =()=>{
                 numberOfPost:res.numberOfPost,
                 images:res.images,
                 error:"",
+                profileImage:res.profileImage,
                 fullname:res.fullname
                 })
                 if(typeof window !=="undefined"){
@@ -101,7 +101,7 @@ const Profile =()=>{
            <div className="container-profile">
                <div className="profile">
                     <div className="profile-image">
-                    <ProfileImage src="https://olympic.ca/wp-content/uploads/2018/02/img_9806-e1518070422879.jpg"/>
+                    <ProfileImage src={profileImage}/>
                     </div>
                     <div className="profile-content">
                     <div>

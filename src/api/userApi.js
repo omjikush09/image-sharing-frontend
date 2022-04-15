@@ -195,10 +195,10 @@ export const addfollowing = ({ userid, addfollowingId }) => {
 
 export const getUserList = (username) => {
   const tempid = JSON.parse(localStorage.getItem("_id"));
-  console.log(tempid)
-  console.log(JSON.parse(localStorage.getItem("jwt")))
+  // console.log(tempid)
+  // console.log(JSON.parse(localStorage.getItem("jwt")))
   var id = null;
-  console.log(username)
+  // console.log(username)
   if (tempid) {
     id = tempid;
   } else {
