@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Search.scss"
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useEffect } from 'react'
 import { getUserList } from '../../api/userApi';
 import ReactLoading from "react-loading"
@@ -11,7 +11,9 @@ const Search = () => {
     const [username,setUsername]=useState("")
     const [users,setUsers]=useState([]);
     const [timer ,setTimer]=useState(null);
-    
+
+    const ref=useRef(null);
+    const searchRef=useRef(null);
     const [state,setState]=useState({
       isLoading:false,
       startTyping:true,
@@ -20,6 +22,7 @@ const Search = () => {
     })
 
     const {isLoading,startTyping,searching,userNotfound}=state;
+
 
 
     const clearTimer=()=>{
@@ -84,17 +87,31 @@ const Search = () => {
     },[username])
 
 
+    useEffect(()=>{
+     //CLOSING of search box
+      const hadleClickOutside=(event)=>{
+        if(ref.current && !ref.current.contains(event.target) &&  searchRef.current && !searchRef.current.contains(event.target)){
+          setState({...state,searching:false})
+    
+        }
+      }
+      document.addEventListener("click",hadleClickOutside)
+      return ()=>{
+        document.removeEventListener("click",hadleClickOutside) //removing event listner when unmountof component
+      }
+    },[ref,searchRef] )
+
   return (
     <>  <div className="search">
             <div className="search_bar">
-            <input className='search_bar-input' placeholder='Search' onFocus={onFocus}  type="search" name="search" id="search" onChange={handleChange} value={username} />
+            <input className='search_bar-input' placeholder='Search' ref={searchRef} onFocus={onFocus} type="search" name="search" id="search" onChange={handleChange} value={username} />
             {searching &&
               <>
              
-            <div className='search_bar-result' >
+            <div className='search_bar-result' ref={ref}  >
                    {users && !userNotfound &&users.map((user)=>{
                      return (
-                       <Link onClick={onBlur} key={user._id} to={"/" +user.username} className="search_bar-link">
+                       <Link onClick={onBlur}   key={user._id} to={"/" +user.username} className="search_bar-link">
                      <div  className="search_username">
                        <div className="image-container">
                          <img src={user.profileImage} className="image-container-image" alt="Profile" />

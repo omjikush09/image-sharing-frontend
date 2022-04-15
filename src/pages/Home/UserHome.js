@@ -17,7 +17,7 @@ const Post =React.lazy(()=>import( "../../components/post/Post"))
 const UserHome = ({loginUser}) => {
   const [following, setFollowing] = useState([]);
   const [posts, setPosts] = useState([]);
-  
+  const [error,setError]=useState("")
   document.title="Friend Chat"
 
   const home = () => {
@@ -25,6 +25,10 @@ const UserHome = ({loginUser}) => {
     let arr = [];
     const temp = [];
     userid && getPost({ userid }).then((res) => { //get post of followings
+      console.log(res)
+      if(res.error){
+        setError(res.error)
+      }
       res.length>0 && res.map((user) => {
         
         let a = {};
@@ -44,18 +48,18 @@ const UserHome = ({loginUser}) => {
            return  arr.push(image);
           });
         }
+        
         return ""
       });
       arr.sort((a, b) => {
         return a.createdAt < b.createdAt ? 1 : -1;
       });
-      // console.log(temp)
+  
       setFollowing(temp);
       setPosts(arr);
       console.log(temp);
       console.log(arr)
-      // console.log(res)
-      // console.log(res[0].user.images);
+      
 
     });
   };
@@ -74,6 +78,7 @@ const UserHome = ({loginUser}) => {
       <div className="container_home">
 
         <div className="container_home-posts">
+          {error && <div>{error}</div>}
           {loginUser.error && <div>{loginUser.error}</div>}
         {posts && posts.map((arr, key) => {
               const u = following.find((user) => {
@@ -137,7 +142,9 @@ const UserHome = ({loginUser}) => {
 const mapStateToProps= state=>({
   loginUser:state.auth
 })
-const mapDispatchToProps=dispatch=>({})
+const mapDispatchToProps=dispatch=>({
+  
+})
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserHome);
