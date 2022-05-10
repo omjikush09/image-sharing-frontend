@@ -1,5 +1,16 @@
 import Axios from "axios";
+import jwt from "jsonwebtoken"
 import API from "../backend";
+
+Axios.interceptors.request.use((config)=>{
+
+  let {payload}=jwt.decode(JSON.parse(localStorage.getItem("jwt")))
+  console.log(payload)
+
+
+  return config
+})
+
 export const signUp = ({ fullname, email, password,username }) => {
   console.log(API);
   // console.log(JSON.stringify())
