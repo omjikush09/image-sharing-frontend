@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 env:
-  CI:false
+  CI: false
 
 
 jobs:
