@@ -12,8 +12,8 @@ const SignIn =({loginWithGoogle})=>{
 
     const navigate= useNavigate()
     const [values,setValues] =useState({
-        email:"",
-        password:"",
+        email:"omjikush09@gmail.com",
+        password:123456789,
         success:"",
         error:"",
         redirect:false
