@@ -87,7 +87,7 @@ const SignIn =({loginWithGoogle})=>{
                 <div className="container_signup" >
                     {successMessage()}
                     {errorMessage()}
-                    <h1 className="text-center">friend Share</h1>
+                    <h1 className="text-center">Friend Share</h1>
                     <form onSubmit={submit} className="form">
                     <div className="form_input-group">
                     <input className="form_input-text" type="email" placeholder="Email"  required id="email"  name="email" onChange={handleChange} value={email} />
